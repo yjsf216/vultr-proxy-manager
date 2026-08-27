@@ -1,0 +1,6 @@
+.DS_Store
+*.local
+config.env
+.secrets/
+.state/
+.xray-cache/
