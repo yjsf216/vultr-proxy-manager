@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vultr Proxy Manager"
+  short_description: "安全创建、检测、重建和删除 Vultr 代理服务器"
+  default_prompt: "Use $vultr-proxy-manager to check and manage my Vultr proxy safely."

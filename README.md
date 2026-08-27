@@ -57,6 +57,15 @@ SSH 密钥会在首次创建时自动生成到 `.secrets/ssh/`。所有凭据、
 ./self-test.sh --live   # 额外检查 Vultr 状态和线上订阅
 ```
 
+## 安装 Codex Skill
+
+```bash
+mkdir -p ~/.codex/skills
+ln -s "$PWD/skills/vultr-proxy-manager" ~/.codex/skills/vultr-proxy-manager
+```
+
+之后可以直接说：`使用 $vultr-proxy-manager 检查我的代理状态`。
+
 ## License
 
 [MIT](LICENSE)
