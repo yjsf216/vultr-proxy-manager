@@ -24,6 +24,9 @@ grep -q 'Vultr-SJC-CDN' cloud-init.sh
 grep -q 'Vultr-SJC-Trojan' cloud-init.sh
 grep -q 'Vultr-SJC-Hysteria2' cloud-init.sh
 grep -q -- '- DIRECT' cloud-init.sh
+grep -q '^ipv6: false$' cloud-init.sh
+grep -q '^tcp-concurrent: true$' cloud-init.sh
+grep -q '^  - GEOSITE,CN,DIRECT$' cloud-init.sh
 ./vultr-proxy.sh | grep -q 'rebuild'
 ./vultr-proxy.sh >/dev/null
 

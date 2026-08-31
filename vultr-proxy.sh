@@ -544,13 +544,15 @@ status_instance() {
 }
 
 test_subscription() {
-  local body headers
+  local body headers node
   body=$(subscription_body) || die "Subscription fetch failed"
   headers=$(subscription_headers) || die "Subscription headers unavailable"
-  [ "$(printf '%s' "$body" | grep -c '^  - name: Vultr-SJC-')" -eq 3 ] || die "Expected three proxy nodes"
-  [ "$(printf '%s' "$body" | grep -c '^  - DOMAIN-SUFFIX\|^  - IP-CIDR\|^  - GEOIP\|^  - MATCH')" -eq 10 ] || die "Expected ten rules"
+  for node in Vultr-SJC-CDN Vultr-SJC-Trojan Vultr-SJC-Hysteria2; do
+    printf '%s' "$body" | grep -q "^  - name: $node$" || die "Missing required node: $node"
+  done
+  [ "$(printf '%s' "$body" | grep -c '^  - DOMAIN-SUFFIX\|^  - IP-CIDR\|^  - GEOSITE\|^  - GEOIP\|^  - MATCH')" -eq 14 ] || die "Expected fourteen rules"
   printf '%s\n' "$headers" | grep -qi '^subscription-userinfo:' || die "Missing traffic header"
-  echo "Subscription test passed: 3 proxy nodes, 10 rules, traffic header present"
+  echo "Subscription test passed: required proxy nodes, 14 rules, traffic header present"
 }
 
 copy_url() {

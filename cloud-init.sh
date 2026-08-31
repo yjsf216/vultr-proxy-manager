@@ -98,6 +98,10 @@ systemctl enable --now sing-box
 
 install -d -m 750 -o root -g nogroup /opt/vultr-subscription
 cat > /opt/vultr-subscription/config.yaml <<'EOF'
+ipv6: false
+tcp-concurrent: true
+unified-delay: true
+
 proxies:
   - name: Vultr-SJC-CDN
     type: trojan
@@ -154,10 +158,14 @@ rules:
   - DOMAIN-SUFFIX,chatgpt.com,PROXY
   - DOMAIN-SUFFIX,oaistatic.com,PROXY
   - DOMAIN-SUFFIX,oaiusercontent.com,PROXY
+  - DOMAIN-SUFFIX,feishu.cn,DIRECT
+  - DOMAIN-SUFFIX,feishucdn.com,DIRECT
+  - DOMAIN-SUFFIX,youdao.com,DIRECT
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - GEOSITE,CN,DIRECT
   - GEOIP,CN,DIRECT
   - MATCH,PROXY
 EOF
